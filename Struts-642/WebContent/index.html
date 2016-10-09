@@ -1,0 +1,441 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>George Mason University</title>
+		<link rel="stylesheet" href="./jquery-ui.css" type="text/css"/>
+<script src="./jquery.js" type="text/javascript"></script>
+<script src="./jquery-ui.js"></script>
+<script src="./jquery-basic.js" type="text/javascript"></script>
+
+
+	<style type="text/css">
+		
+		body {
+    background-image: url("gmu.jpg");
+	  background-repeat: no-repeat;		
+	  background-size: 2000px 1200px;
+}
+		</style>
+		<script type="text/javascript">
+	
+	var now= new Date();
+	var hour=now.getHours();
+	var name;
+	
+	
+	if(hour < 12)
+	document.write("<h1> Good Morning,");
+	
+	else
+	{
+	hour=hour -12;
+	
+	if ( hour < 6 ) 
+	
+	document.write( "<h1>Good Afternoon, " ); 
+
+	else
+	
+	document.write( "<h1>Good Evening, " );
+	}
+	var flag=true;
+	
+	if(document.cookie)
+	{
+	var myCookie= unescape(document.cookie);
+	
+	var cookieTokens = myCookie.split( "=" ); 
+
+	name = cookieTokens[ 1 ]; 
+	
+	}
+	
+	
+	else
+	{
+	name = window.prompt( "Please enter your name", "" );
+	while(flag == true)
+	{
+	if (name =="")
+	{
+	
+	alert("Please enter your name");
+	name = window.prompt( "Please enter your name", "" );
+	}
+	else if(name!="")
+	{
+	flag=false;}
+	}
+	var date= new Date();
+	date.setTime(date.getTime()+(10*1000));
+	var expires=";expires="+date.toGMTString();	
+	
+	document.cookie = "name=" + escape( name )+expires+"; path=/"; 
+
+	}
+	
+	document.writeln( 
+name + ", welcome to Assignment#3</h1>" ); 
+document.writeln( "<a href = 'javascript:wrongPerson()'> " + 
+"Click here if you are not " + name + "</a>" ); 
+function wrongPerson() 
+{
+name = window.prompt( "Please enter your name", "" );
+var date= new Date();
+	date.setTime(date.getTime()+(10*1000));
+	var expires=";expires="+date.toGMTString();	
+	
+	document.cookie = "name=" + escape( name )+expires+"; path=/"; 
+
+location.reload(); 
+
+}
+function splitdata()
+{
+var sum=0;
+var inputString = document.getElementById("data").value; 
+var tokens = inputString.split( "," ); 
+
+if(tokens.length!=10){
+document.getElementById("dataspan").textContent = "enter 10 digits";
+return false;
+}
+
+for(i=0;i<tokens.length;i++)
+{
+	if(tokens[i]<1 || tokens[i] > 100)
+{
+//document.getElementById("dataspan").textContent = " ";
+//document.getElementById("dataspan").textContent = "Put number 1 to 100" ;
+$( "#dialog" ).text("Numbers below 1 and above 100 are not allowed");
+$( "#dialog" ).dialog();
+return false;
+}
+else
+sum=sum+parseInt(tokens[i]);
+
+}
+var avg=0;
+
+avg=sum/10;
+
+	var max=tokens[0];
+	for(i=0;i<tokens.length;i++)
+{
+if(parseInt(tokens[i])>max)
+{
+max=tokens[i];
+}
+
+}
+
+document.getElementById("dataspan").textContent = "" ;
+
+document.getElementById("Avg").value=avg;
+document.getElementById("Max").value=max;
+
+}
+function validateForm() {
+    var x = document.forms["myForm"]["usrname"].value;
+   var ck_password =  /^[A-Za-z]+$/;
+   var result="";
+   if (x == null || x == "") {
+        var usernull ="Username must be filled out";
+		result= result + "\n" + usernull;
+       
+    }
+	
+	
+	else if(!x.match(ck_password))
+	{
+	var user= "Username must contain only alphabets";
+	result= result+ "\n" + user;
+	document.forms["myForm"]["usrname"].value="";
+	 
+	}
+	 var y = document.forms["myForm"]["saddress"].value;
+	
+	var address= /^[0-9a-zA-Z]+$/;
+	if (y == null || y == "") {
+        var addressnull= "Address must be filled out";
+		
+      result= result+ "\n" + addressnull;
+    }
+	
+	else if(!y.match(address))
+	{
+	var addressalert ="Check address syntax";
+	result= result+ "\n" +addressalert;
+	document.forms["myForm"]["saddress"].value="";
+	
+	}
+
+	
+	 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
+	var email= document.forms["myForm"]["email"].value;
+		if (email == null || email == "") {
+        var emailnull="Email must be filled out";
+		result= result+ "\n" +emailnull;
+		document.forms["myForm"]["email"].value="";
+      
+    }
+		
+	else	if(!email.match(mailformat))  
+		{
+		var emailalert="Enter vaild email";
+		result= result+ "\n" +emailalert;
+		document.forms["myForm"]["email"].value="";
+		}
+	 
+	 var check=0;
+	if(document.getElementById("myCheck").checked == true )
+	
+	{
+	check++;
+
+	}
+	
+	if(document.getElementById("myCheck1").checked == true )
+	
+	{
+	check++;
+
+	}
+	if(document.getElementById("myCheck2").checked == true )
+	
+	{
+	check++;
+
+	}
+	if(document.getElementById("myCheck3").checked == true )
+	
+	{
+	check++;
+
+	}
+	if(document.getElementById("myCheck4").checked == true )
+	
+	{
+	check++;
+
+	}
+	if(document.getElementById("myCheck5").checked == true )
+	
+	{
+	check++;
+
+	}
+	
+	if (check<2)
+	{
+	var check= "Select at least 2 check boxes";
+	result= result+ "\n" +check;
+	document.getElementById("myCheck").checked = false;
+	document.getElementById("myCheck1").checked = false;
+	document.getElementById("myCheck2").checked = false;
+	document.getElementById("myCheck3").checked = false;
+	document.getElementById("myCheck4").checked = false;
+	document.getElementById("myCheck5").checked = false;
+	}
+	
+
+  var c=0;
+if(document.getElementById("myRadio").checked == true || document.getElementById("myRadio1").checked ==true || document.getElementById("myRadio2").checked == true || document.getElementById("myRadio3").checked == true )
+{
+c=c+1;
+}
+else if (c==0){
+var radioalert= "Please select a radio button";
+result= result+ "\n" + radioalert;
+}
+		if(result!="")
+	{	
+			 $( "#dialog" ).text(result);
+			  $( "#dialog" ).dialog();
+	}	
+return false;
+}
+function myFunction()
+{
+ var xhttp = new XMLHttpRequest();
+ var zippUrl = "zipcode.json"
+  xhttp.onreadystatechange = function() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+   
+     var res_arr = xhttp.responseText;
+     var obj = JSON.parse(res_arr);
+     var n = obj.zipcodes.length;
+     var flag = "false";
+
+     for(i=0; i<n; i++){
+       
+       var zip_res = parseInt(obj.zipcodes[i].zip);
+       var zip_inp = parseInt(document.getElementById("zipcode").value);
+
+       if(zip_res === zip_inp){
+         flag = "true";
+         document.getElementById("city").value = obj.zipcodes[i].city;
+         document.getElementById("state").value = obj.zipcodes[i].state;
+	document.getElementById("zipcode1").innerHTML ="";
+       }
+     }
+     
+     if(flag.match("false")){
+     	document.getElementById("zipcode1").innerHTML = "Please enter a valid Zip Code" ;
+     	document.getElementById("city").textContent = " ";
+         document.getElementById("state").textContent = " ";
+     	
+     }
+    }
+  }
+  xhttp.open("GET", zippUrl, true);
+  xhttp.send();
+
+
+}
+
+</script>
+	</head>
+<body>
+
+	<form name= "myForm" action="DemoServlet" method="post">
+	<font color="black">
+	
+	<table summary ="Survey Table">
+		
+	<p>
+	<thead>
+	<td><tr> <th> Street Address: <input type="text" name="saddress" placeholder="Street Address"/><br></th></tr></td>
+    
+	</thead>
+	
+</p>
+	<tbody>
+		<p><td><tr> StudentId*: <input type="text" name="studentid" placeholder="StudentID" autofocus required/><br/><td/>
+	
+	</p>
+	<p>     
+	<td><tr> Username*: <input type="text" name="username" placeholder="UserName" /><br/><td/>
+	
+	</p>
+	
+</tbody>
+<tfoot>
+
+	</tfoot>
+	
+	
+	</table>
+ 
+ <td><tr>City <input type="text" name="city" id="city" placeholder="City"/><br></tr></td></th>
+  <p>
+	<td><tr>State <input type="text"  name="state" id="state" placeholder="State "/><br></tr></td>
+	</p>
+	<p>
+	
+	
+	<td><tr>Zip <input type="text" name="Zip" placeholder="Zip" id="zipcode" onblur="myFunction()"  /><br></tr></td>
+	<span id="zipcode1"></span>
+	</p>
+	<p>
+	<td><tr>Telephone<input type="tel" name="tphone" placeholder="+1  (###)  ### - ####" ><br></tr></td>
+	</p>
+	<p>
+	<td><tr>E-mail<input type="text" name="email" placeholder="email@xyz.com" autocomplete="off" ><br></tr></td>
+	</p>
+	<p>
+	<td><tr>URL<input type="url" name="Url" placeholder="URL" ><br></tr></td>
+	</p>
+	<p>
+	<td><tr>Date: <input type="date" name="Date"><br></tr></td>
+	</p>
+	<p>
+	<td><tr>Data<input id="data" type="text" name="data" placeholder="Data" onchange="splitdata()"/><br></tr></td>
+	<span id="dataspan"></span>
+	</p>
+	
+	 
+
+	
+	
+	
+	What did you like about the Campus<br>
+	
+<input type="checkbox" name="campus" value="Student" id="myCheck">Student<br>
+<input type="checkbox" name="campus" value="Location" id="myCheck1">Location <br>
+<input type="checkbox" name="campus" value="Atmosphere" id="myCheck2">Atmosphere <br>
+<input type="checkbox" name="campus" value="Dorm Rooms" id="myCheck3">Dorm Rooms <br>
+<input type="checkbox" name="campus" value="Sports" id="myCheck4">Sports<br> 	
+<input type="checkbox" name="campus" value="Campus" id="myCheck5">Campus<br> <br>
+
+	
+	<p>
+    <label for="textarea">How do you know about GMU:<br></label>
+</p>
+
+<input type="radio" name="same" value="internet"  id="myRadio">Internet<br>
+ <input type="radio" name="same" value="friends"  id="myRadio1">Friends<br>
+<input type="radio" name="same" value="television"  id="myRadio2">Television<br>
+<input type="radio" name="same" value="others"  id="myRadio3">Others<br><br>
+
+
+Would you like to recommend this university to anyone
+<select name="options">
+
+  <option value="select">Select</option>
+  <option value="verylikely">Very Likely</option>
+  <option value="likely">Likely</option>
+  <option value="unlikely">Unlikely</option>
+</select><br><br>
+	
+	 <label for="textarea" >Comments:
+ <textarea rows="1" cols="20" name="comments">
+		  </textarea><br><br>	
+	<p>
+	<label for = "txtList" >Graduation Month:
+	<input type ="text" id=="txtList" name="txtList"
+	placeholder="Select a month" list="months" />
+	<datalist id="months">
+	<option value="January">
+	<option value="February">
+	<option value="March">
+	<option value="April">
+	<option value="May">
+	<option value="June">
+	<option value="July">
+	<option value="August">
+<option value="September">
+<option value="October">
+<option value="November">
+<option value="December">
+
+</datalist>
+</label>
+<td>  Year : <input type="text" name="Year" placeholder="Year" ><br></td>
+</p>
+
+	</p>
+		
+		
+	
+	<input type="submit" value="Submit" onclick="return validateForm()">
+  <input type="reset" value="Reset">
+
+	
+
+</form>
+	</font>
+<div id="dialog" title="Window error"> 
+</div>
+
+<p>
+<a href="https://www2.gmu.edu/"><img src="GMULOGO.jpg" alt="Please visit
+http://www.gmu.edu for more information." align="right" id="logo"/>
+</a>
+</p>
+
+	</body>
+</html>
